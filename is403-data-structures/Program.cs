@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*******************************************************************************************
+ * Daniel Ferolino
+ * IS 403
+ * Data Structures Assignment
+ * Description: This program demonstrates the usage of a queue and a dictionary. The queue
+ *              called 'customers' contains strings and the dictionary containes key-value
+ *              pairs of strings to ints. Creates 100 orders of 8 unique customers. Tallies
+ *              orders and prints total.
+ *              
+ ******************************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +19,22 @@ namespace is403_data_structures
 {
     class Program
     {
+        // given code
+        public static Random random = new Random();
+
+        public static string randomName()
+        {
+            string[] names = new string[8] { "Dan Morain", "Emily Bell", "Carol Roche", "Ann Rose", "John Miller", "Greg Anderson", "Arthur McKinney", "Joann Fisher" };
+            int randomIndex = Convert.ToInt32(random.NextDouble() * 7);
+            return names[randomIndex];
+        }
+
+        public static int randomNumberInRange()
+        {
+            return Convert.ToInt32(random.NextDouble() * 20);
+        }
+
+        // main starts here
         static void Main(string[] args)
         {
             // initialize queue of customers
@@ -21,12 +48,12 @@ namespace is403_data_structures
 
             for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++)
             {
-                string name = randomName();
+                string name = randomName(); 
                 customers.Enqueue(name); // add 100 customers to the queue
             }
 
             // simulate an order for each person in the queue while keeping track of how many burgers they order
-            while (customers.Count > 0) // use count over enumerator to not crash program while dequeing in loop
+            while (customers.Count > 0) // use count over enumerator to not crash program while if using dequeue in loop
             {
                 // check if that customer exists
                 if (customerInfo.ContainsKey(customers.Peek()))
@@ -48,25 +75,8 @@ namespace is403_data_structures
                 Console.WriteLine(custOrder.Key + "\t" + custOrder.Value);
             }
 
-
             // end program
             Console.ReadKey();
-        }
-
-
-        // given code
-        public static Random random = new Random();
-
-        public static string randomName()
-        {
-            string[] names = new string[8] { "Dan Morain", "Emily Bell", "Carol Roche", "Ann Rose", "John Miller", "Greg Anderson", "Arthur McKinney", "Joann Fisher" };
-            int randomIndex = Convert.ToInt32(random.NextDouble() * 7);
-            return names[randomIndex];
-        }
-
-        public static int randomNumberInRange()
-        {
-            return Convert.ToInt32(random.NextDouble() * 20);
         }
     }
 }
